@@ -22,6 +22,8 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
+    // Clear previous weather data before fetching new data
+    setWeatherData(null);
     fetchWeather(selectedCity, forecastDays);
   }, [selectedCity, forecastDays]);
 
@@ -101,7 +103,7 @@ function App() {
           />
         </label>
 
-        {weatherData && (
+        {weatherData ? (
           <div className="weather-info">
             <h3>{forecastDays}-Day Forecast</h3>
             <div className="forecast">
@@ -120,9 +122,9 @@ function App() {
                 </div>
               ))}
             </div>
-
-
           </div>
+        ) : (
+          <p>Loading weather data...</p>
         )}
       </header>
     </div>
